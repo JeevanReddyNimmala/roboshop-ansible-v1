@@ -20,7 +20,6 @@
       when: action == "create"
       register: ec2_output
     
-    -name: print the ec2 output
+    - name: print the ec2 output
       debug:
         msg: "{{ ec2_output }}"
-        
