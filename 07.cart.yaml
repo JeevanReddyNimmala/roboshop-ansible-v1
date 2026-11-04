@@ -1,0 +1,81 @@
+- name: Configure cart Srever
+  hosts: cart
+  become: yes
+  tasks:
+
+  - name: disable nodejs module
+    # ansible.builtin.command: "yum module disable nodejs -y"
+    # register: result
+    # ignore_errors: yes
+    command: dnf module disable nodejs -y
+
+  - name: enable nodejs module
+    command: dnf module enable nodejs:24 -y
+
+  - name: install nodejs
+    dnf:
+      name: nodejs
+      state: present
+
+  - name: create app cart
+    cart:
+      name: roboshop
+      create_home: false
+      home: /app
+      system: true
+      shell: /sbin/nologin
+      comment: "Roboshop System cart"
+
+  - name: delete exisiting app directory
+    file:
+      path: /app
+      state: absent
+
+  - name: remove cart.zip
+    file:
+      path: /tmp/cart.zip
+      state: absent
+
+  - name: create app directory
+    file:
+      path: /app
+      state: directory
+
+  - name: download cart zip
+    get_url:
+      url: "https://raw.githubcartcontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/cart-v4.zip"
+      dest: /tmp/cart.zip            
+  
+
+  - name: unzip cart zip
+    unarchive:
+      src: /tmp/cart.zip
+      dest: /app
+      remote_src: yes 
+
+  - name: install nodejs dependencies
+    community.general.npm:
+      path: /app
+
+  - name: copy cart service file
+    ansible.builtin.template:
+      src: cart.service.j2  
+      dest: /etc/systemd/system/cart.service
+
+  
+  - name: Reload systemd daemon
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
+  - name: Start and Restart cart service
+    service:
+      name: cart
+      state: restarted
+      enabled: yes    
+  
+
+  # - name: start cart service
+  #   systemd:
+  #     name: cart
+  #     state: restarted
+  #     enabled: yes     
