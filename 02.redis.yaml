@@ -1,0 +1,17 @@
+- name: Configure redis
+  hosts: redis
+  become: yes
+  - name: task disable redis 7
+    command: dnf module disable redis:7 -y
+
+  - name: install redis
+    package:
+      name: redis
+      state: present
+  
+  # - name: enable redis
+  #   service:
+  #     name: redis
+  #     state: started
+  #     enabled: yes
+
