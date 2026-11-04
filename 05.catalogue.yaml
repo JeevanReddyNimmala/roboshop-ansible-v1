@@ -13,7 +13,7 @@
     command: dnf module enable nodejs:24 -y
 
   - name: install nodejs
-    packages:
+    dnf:
       name: nodejs
       state: present
 
@@ -22,6 +22,7 @@
       name: roboshop
       create_home: false
       home: /app
+      system: true
       shell: /sbin/nologin
-      comment: "Roboshop Application User"
+      comment: "Roboshop System User"
   
