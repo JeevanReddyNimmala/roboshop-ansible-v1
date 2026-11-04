@@ -1,7 +1,8 @@
 - name: Configure mongodb
   hosts: mongodb
   become: yes
-  - name: copy mango repo
-    copy:
-      src: mongo.repo
-      dest: /etc/yum.repos.d/mongo.repo
+  tasks:
+    - name: copy mongo repo
+      copy:
+        src: mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
