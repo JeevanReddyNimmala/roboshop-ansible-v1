@@ -34,11 +34,11 @@
   #   changed_when: "'already exists' not in rabbitmq_user.stderr and rabbitmq_user.rc == 0"
 
   - name: Create RabbitMQ user and set password
-      community.rabbitmq.rabbitmq_user:
-        user: "roboshop"
-        password: "roboshop123"
-        vhost: "/"
-        configure_priv: ".*"
-        write_priv: ".*"
-        read_priv: ".*"
-        state: present
+    community.rabbitmq.rabbitmq_user:
+      user: "roboshop"
+      password: "roboshop123"
+      vhost: "/"
+      configure_priv: ".*"
+      write_priv: ".*"
+      read_priv: ".*"
+      state: present
