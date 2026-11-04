@@ -12,5 +12,11 @@
       - maven
       - java-25-openjdk-devel
       state: present
-      
-        
+
+  - name: find the java-25 path
+    shell: readlink -f $(ls /usr/lib/jvm/java-25-openjdk/bin/java | head -1)  
+    register: java25
+
+  - name:  print the outpu
+    debug:
+      msg: "{{ java25}}"      
