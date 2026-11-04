@@ -17,14 +17,14 @@
       name: nodejs
       state: present
 
-  - name: create app cart
+  - name: create app user
     user:
       name: roboshop
       create_home: false
       home: /app
       system: true
       shell: /sbin/nologin
-      comment: "Roboshop System cart"
+      comment: "Roboshop System User"
 
   - name: delete exisiting app directory
     file:
@@ -43,7 +43,7 @@
 
   - name: download cart zip
     get_url:
-      url: "https://raw.githubcartcontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/cart-v4.zip"
+      url: "https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/cart-v4.zip"
       dest: /tmp/cart.zip            
   
 
@@ -59,10 +59,11 @@
 
   - name: copy cart service file
     ansible.builtin.template:
-      src: cart.service.j2  
+      src: cart.service
       dest: /etc/systemd/system/cart.service
 
-  
+
+
   - name: Reload systemd daemon
     ansible.builtin.systemd_service:
       daemon_reload: true
