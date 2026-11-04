@@ -73,7 +73,12 @@
       state: present
 
   - name: check whether products loaded or not
-    command:     
+    command: mongosh --host {{ mongodb_host }} --quiet --eval 'db.getSiblingDB("catalogue").products.countDocuments()' 
+    register: product_count
+
+  - name: print product_count
+    debug:
+      msg: "{{ product_count }}"   
 
 
   # - name: start catalogue service
