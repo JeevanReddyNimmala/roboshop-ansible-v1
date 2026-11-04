@@ -18,7 +18,7 @@
       state: present
 
   - name: create app cart
-    cart:
+    user:
       name: roboshop
       create_home: false
       home: /app
