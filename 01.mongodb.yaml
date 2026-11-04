@@ -6,6 +6,17 @@
       copy:
         src: mongo.repo
         dest: /etc/yum.repos.d/mongo.repo
-    - name: test the inventory variable
-      debug:
-        msg: "The app name is {{app_name}}"
+    # - name: test the inventory variable
+    #   debug:
+    #     msg: "The app name is {{app_name}}"
+
+    - name: Install mongodb
+      package:
+        name: mongodb-org
+        state: present
+
+    - name: start mongodb
+      service:
+        name: mongod
+        state: started
+        enabled: yes    
