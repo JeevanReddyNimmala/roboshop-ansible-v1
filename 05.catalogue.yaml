@@ -59,7 +59,7 @@
 
   - name: copy catalogue service file
     template:
-      src: catalogue.service.j2
+      src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
       remote_src: yes 
 
