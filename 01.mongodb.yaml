@@ -25,4 +25,10 @@
       replace:
         path: /etc/mongod.conf
         regexp: '127.0.0.1' 
-        replace: '0.0.0.0'       
+        replace: '0.0.0.0'   
+
+    - name: Re-start mongodb
+      service:
+        name: mongod
+        state: restarted
+        enabled: yes        
