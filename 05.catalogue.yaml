@@ -58,10 +58,9 @@
       path: /app
 
   - name: copy catalogue service file
-    template:
-      src: catalogue.service
-      dest: /etc/systemd/system/catalogue.service
-      remote_src: yes 
+  ansible.builtin.template:
+    src: catalogue.service
+    dest: /etc/systemd/system/catalogue.service
 
   - name: copy mongo repo
     copy:
