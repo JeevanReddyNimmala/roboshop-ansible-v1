@@ -1,0 +1,17 @@
+- name: Configure rabbitmq
+  hosts: rabbitmq
+  become: yes
+  tasks:
+  - name: install rabbitmq
+    package:
+      name:rabbitmq-server
+      state: present
+
+  - name: enable rabbitmq server
+    service:
+      name: rabbitmq-server
+      state: started
+      enabled: yes
+
+  # - name: create user and give permissions
+  #   command: 
