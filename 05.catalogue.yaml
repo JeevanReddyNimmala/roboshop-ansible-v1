@@ -82,8 +82,19 @@
 
 
   - name: load the product
-    command: mongosh --host {{ mongodb_host }} </app/db/master-data.js
-    when: product_count != 0
+    shell: mongosh --host {{ mongodb_host }} </app/db/master-data.js
+    when: product_count.stdout | int == 0
+
+  - name: Reload systemd daemon
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
+  - name: Start and Restart Catalogue service
+    service:
+      name: catalogue
+      state: restarted
+      enabled: yes    
+  
 
   # - name: start catalogue service
   #   systemd:
