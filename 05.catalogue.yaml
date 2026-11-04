@@ -81,6 +81,10 @@
       msg: "{{ product_count }}"   
 
 
+  - name: load the product
+    command: mongosh --host {{ mongodb_host }} </app/db/master-data.js
+    when: product_count != 0
+
   # - name: start catalogue service
   #   systemd:
   #     name: catalogue
