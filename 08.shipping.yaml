@@ -1,0 +1,4 @@
+name: Configure Shipping Module
+  hosts: shipping
+  become: yes
+  tasks:
