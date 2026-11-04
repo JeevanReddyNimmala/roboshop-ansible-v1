@@ -8,10 +8,10 @@
       state: present
 
   - name: enable rabbitmq server
-    service:
-      name: rabbitmq-server
-      state: started
-      enabled: yes
+      service:
+        name: rabbitmq-server
+        state: started
+        enabled: yes
 
   # - name: create user and give permissions
   #   command: 
