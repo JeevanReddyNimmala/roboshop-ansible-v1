@@ -19,15 +19,22 @@
 
   - name:  print the outpu
     debug:
-      msg: "{{ java25}}"   
+      msg: "{{ java25}}"  
 
-  - name: make java25 as default
-    command: alternatives --config java {{ java25.stdout }}
 
-  - name: set JAVA_HOME
-    copy:
-      content: "export JAVA_HOME={{ java25.stdout | dirname }}"
-      dest: /etc/profile.d/java.sh
+  - name: Set default Java version to Java 25
+    community.general.alternatives:
+      name: JAVA_HOME
+      path: /usr/lib/jvm/java-25-openjdk/bin/java # Double-check if your exact path matches this binary
+     
+
+  # - name: make java25 as default
+  #   command: alternatives --config java {{ java25.stdout }}
+
+  # - name: set JAVA_HOME
+  #   copy:
+  #     content: "export JAVA_HOME={{ java25.stdout | dirname }}"
+  #     dest: /etc/profile.d/java.sh
 
   - name: create app user
     user:
@@ -69,6 +76,6 @@
     command: mvn clean package
     args:
       chdir: /app
-      
-              
+
+
        
