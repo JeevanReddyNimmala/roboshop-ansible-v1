@@ -73,6 +73,9 @@
       name: mongodb-mongosh
       state: present
 
+  - name: check whether products loaded or not
+    command:     
+
 
   # - name: start catalogue service
   #   systemd:
