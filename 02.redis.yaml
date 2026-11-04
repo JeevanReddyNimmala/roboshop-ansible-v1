@@ -12,9 +12,9 @@
 
   - name: allow remorte connections
     replace:
-    path: /etc/redis/redis.conf
-    regexp: '127.0.0.1'
-    replace: '0.0.0.0'
+      path: /etc/redis/redis.conf
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
   
   # - name: enable redis
   #   service:
