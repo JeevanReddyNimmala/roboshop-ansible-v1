@@ -21,9 +21,9 @@
     command: dnf module enable nginx:1.26 -y
 
   - name: start nginx:1.26 module
-    service:
+    dnf:
       name: nginx
-      state: present    
+      state: started    
 
   - name: remove default content
     command: rm -rf /usr/share/nginx/html/*
