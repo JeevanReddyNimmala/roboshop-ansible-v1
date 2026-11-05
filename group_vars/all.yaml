@@ -4,4 +4,7 @@ mongodb_host: mongodb.jsrgroup.online
 redis_host: redis.jsrgroup.online
 catalogue_host: catalogue.jsrgroup.online
 
+
+
 rabbitmq_password: roboshop123
+mysql_root_password: Roboshop@1
