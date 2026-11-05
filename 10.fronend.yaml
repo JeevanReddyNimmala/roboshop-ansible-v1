@@ -22,7 +22,7 @@
 
   - name: start nginx:1.26 module
     service:
-      name: nhinx
+      name: nginx
       state: present    
 
   - name: remove default content
