@@ -106,7 +106,7 @@
   - name: print cities count
     debug:
       msg: "{{ cities_count }}"   
-      tags:
+    tags:
       - mysql
 
   - name: load the data into ansible
