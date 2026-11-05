@@ -30,6 +30,12 @@
   - name: remove default content
     command: rm -rf /usr/share/nginx/html/*
 
+  - name: create app directory
+    file:
+      path: /usr/share/nginx/html
+      state: directory
+
+
   - name: download frontend zip
     get_url:
       url: "https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/frontend-v4.zip"
@@ -39,7 +45,7 @@
   - name: unzip frontend zip
     unarchive:
       src: /tmp/frontend.zip
-      dest: /app
+      dest: /usr/share/nginx/html
       remote_src: yes   
 
   - name: copy roboshop service file
