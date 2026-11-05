@@ -48,9 +48,9 @@
       dest: /usr/share/nginx/html
       remote_src: yes   
 
-  - name: copy roboshop service file
+  - name: copy roboshop conf file
     ansible.builtin.template:
-      src: roboshop.service
+      src: roboshop.conf
       dest: /etc/nginx/default.d/roboshop.conf        
 
   - name: Check Nginx configuration syntax
