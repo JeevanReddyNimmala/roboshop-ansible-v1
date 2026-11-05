@@ -25,7 +25,8 @@
   #     check_implicit_admin: yes
   #     state: present
 
-  - name: set up mysql root password
-    command: mysql_secure_installation --set-root-pass"{{mysql_root_password}}"
+  - name: Set root password for MySQL
+    ansible.builtin.command: mysql_secure_installation --set-root-pass Roboshop@1
+
    
  
