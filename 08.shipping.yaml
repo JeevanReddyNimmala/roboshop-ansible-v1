@@ -104,4 +104,20 @@
     debug:
       msg: "{{ cities_count }}"     
 
+  - name: load the data into ansible
+    shell: mysql -h "{{  mysql_host }}" -u root -p{{ mysql_root_password }} < /app/db/master-data.sql
+    when: cities_count.rc !=0 or cities_count.stdout | int == 0 
+
+  - name: create app user in mysql
+    shell: mysql -h "{{  mysql_host }}" -u root -p{{ mysql_root_password }} < /app/db/user-data.sql
+
+  - name: Reload systemd daemon
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
+  - name: Start and Restart Shipping service
+    service:
+      name: shipping
+      state: restarted
+      enabled: yes    
        
