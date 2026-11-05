@@ -82,7 +82,7 @@
 
   - name: print the java version without $JAVA_HOME
     debug:
-      msg: "{{ man_default.stdout_lines }}"
+      msg: "{{ mvn_default.stdout_lines }}"
 
 
   - name: build shipping
