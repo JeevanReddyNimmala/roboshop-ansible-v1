@@ -11,7 +11,8 @@
       name:
       - maven
       - java-25-openjdk-devel
-      - maven-openjdk25 #installing this so that we dont need to set $JAVA_HOME
+      - maven-openjdk25
+      - mysql #installing this so that we dont need to set $JAVA_HOME
       state: present
 
   # - name: find the java-25 path
@@ -90,5 +91,17 @@
     args:
       chdir: /app
 
+  - name: move shipping jar file
+    command: mv target/shipping.jar shipping.jar
+    args:
+      chdir: /app
+
+  - name: check the existance of cities data
+    command: mysql -h "{{  mysql_host }}" -u root -pRoboShop@1 -N -B -e "SELECT COUNT(*) FROM cities.cities;"
+    register: cities_count
+
+  - name: print cities count
+    debug:
+      msg: "{{ cities_count }}"     
 
        
