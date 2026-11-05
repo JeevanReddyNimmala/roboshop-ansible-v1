@@ -3,6 +3,7 @@ ansible_password: DevOps321
 mongodb_host: mongodb.jsrgroup.online
 redis_host: redis.jsrgroup.online
 catalogue_host: catalogue.jsrgroup.online
+mysql_host: mysql.jsrgroup.online
 
 
 
