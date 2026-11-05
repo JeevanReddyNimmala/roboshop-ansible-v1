@@ -120,6 +120,11 @@
     tags:
       - mysql
 
+  - name: copy shipping service file
+    ansible.builtin.template:
+      src: shipping.service
+      dest: /etc/systemd/system/shipping.service    
+
   - name: Reload systemd daemon
     ansible.builtin.systemd_service:
       daemon_reload: true
