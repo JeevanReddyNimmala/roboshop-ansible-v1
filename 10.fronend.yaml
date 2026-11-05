@@ -20,10 +20,12 @@
   - name: enable nginx:1.26 module
     command: dnf module enable nginx:1.26 -y
 
-  - name: start nginx:1.26 module
-    dnf:
+  - name: Start and enable Nginx service
+    ansible.builtin.systemd_service:
       name: nginx
-      state: started    
+      state: started
+      enabled: true
+ 
 
   - name: remove default content
     command: rm -rf /usr/share/nginx/html/*
