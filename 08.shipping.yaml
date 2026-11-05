@@ -11,21 +11,22 @@
       name:
       - maven
       - java-25-openjdk-devel
+      - maven-openjdk25 #installing this so that we dont need to set $JAVA_HOME
       state: present
 
-  - name: find the java-25 path
-    shell: readlink -f $(ls /usr/lib/jvm/java-25-openjdk/bin/java | head -1)  
-    register: java25
+  # - name: find the java-25 path
+  #   shell: readlink -f $(ls /usr/lib/jvm/java-25-openjdk/bin/java | head -1)  
+  #   register: java25
 
-  - name:  print the outpu
-    debug:
-      msg: "{{ java25}}"  
+  # - name:  print the outpu
+  #   debug:
+  #     msg: "{{ java25}}"  
 
 
-  - name: Set default Java version to Java 25
-    community.general.alternatives:
-      name: JAVA_HOME
-      path: /usr/lib/jvm/java-25-openjdk/bin/java # Double-check if your exact path matches this binary
+  # - name: Set default Java version to Java 25
+  #   community.general.alternatives:
+  #     name: JAVA_HOME
+  #     path: /usr/lib/jvm/java-25-openjdk/bin/java # Double-check if your exact path matches this binary
      
 
   # - name: make java25 as default
@@ -72,7 +73,19 @@
       dest: /app
       remote_src: yes 
 
-  - name: install dependencies
+  - name: mvn withou $JAVA_HOME
+    command: mvn --version
+    args:
+      chdir: /app
+    register: mvn_default
+
+
+  - name: print the java version without $JAVA_HOME
+    debug:
+      msg: "{{ man_default.stdout_lines }}"
+
+
+  - name: build shipping
     command: mvn clean package
     args:
       chdir: /app
